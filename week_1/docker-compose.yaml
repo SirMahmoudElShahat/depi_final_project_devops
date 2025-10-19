@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  urlshortener:
+    build: .
+    image: urlshortener:local
+    ports:
+      - "8000:8000"
+    environment:
+      - URLSHORTENER_DB=/app/data/urls.db
+      - BASE_URL=http://localhost:8000
+      - PORT=8000
+    volumes:
+      - urlshortener_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  urlshortener_data:
