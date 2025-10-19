@@ -49,8 +49,8 @@ url-shortener/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<abdlrhman00>/url-shortener.git
-cd url-shortener
+git clone https://github.com/SirMahmoudElShahat/depi_final_project_devops.git
+cd week_1
 ```
 
 ### 2. Install dependencies
