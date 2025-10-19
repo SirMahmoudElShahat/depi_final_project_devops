@@ -3,7 +3,7 @@ version: "3.8"
 services:
   urlshortener:
     build: .
-    image: urlshortener:local
+    image: urlshortener:latest
     ports:
       - "8000:8000"
     environment:
