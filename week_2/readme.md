@@ -100,8 +100,10 @@ This tells Prometheus to scrape metrics from the Flask app every 5 seconds.
 Open **[http://localhost:9091/targets](http://localhost:9090/targets)**
 You should see the target `app:8000` **UP** ✅
 
-📸 *Screenshot here:*
-`![Prometheus Target Up](<img width="1918" height="937" alt="Prometheus Target Up" src="https://github.com/user-attachments/assets/be786f93-b247-4000-a0be-4d2ad85fc7a8" />)`
+📸 <em>Screenshot here:</em><br>
+
+<img src="https://github.com/user-attachments/assets/be786f93-b247-4000-a0be-4d2ad85fc7a8" alt="Prometheus Target Up" width="800">
+
 
 ---
 
@@ -115,8 +117,10 @@ You should see the target `app:8000` **UP** ✅
    ```
 3. Click **Execute** to view live data.
 
-📸 *Screenshot here:*
-`![Prometheus Execute Query](<img width="1919" height="932" alt="Prometheus Execute Query" src="https://github.com/user-attachments/assets/b8026846-cef7-4a3e-9f53-1db1b18b00ce" />)`
+📸 <em>Screenshot here:</em><br>
+
+<img src="https://github.com/user-attachments/assets/b8026846-cef7-4a3e-9f53-1db1b18b00ce" alt="Prometheus Execute Query" width="800">
+
 
 ---
 
