@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  # 1️⃣ URL Shortener Application (Instrumented Webservice)
+  app:
+    build: .
+    image: urlshortener:latest
+    container_name: urlshortener_app 
+    ports:
+      - "8000:8000"   # Expose app on localhost:8000
+    environment:
+      - URLSHORTENER_DB=/app/data/urls.db
+      - BASE_URL=http://app:8000
+      - PORT=8000
+    volumes:
+      - urlshortener_data:/app/data   # Persist SQLite data
+    networks:
+      - monitoring-net                # Shared network with Prometheus
+    restart: unless-stopped
+
+  # 2️⃣ Prometheus Service (Metrics Collector)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9091:9090"   # Expose Prometheus UI on localhost:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro  # Mount configuration file
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'       # Specify config path
+    networks:
+      - monitoring-net
+    depends_on:
+      - app     # Wait for app service to start before Prometheus
+
+# 3️⃣ Define shared network for communication between services
+networks:
+  monitoring-net:
+    driver: bridge
+
+# 4️⃣ Define volume for persistent SQLite data
+volumes:
+  urlshortener_data:
