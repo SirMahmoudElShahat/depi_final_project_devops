@@ -16,7 +16,6 @@ In this week, the focus is on **monitoring the containerized URL shortener** usi
 
 ## 🛠️ Tech Stack
 
-* **Python (Flask)** – Web service
 * **SQLite** – Local database
 * **Docker & Docker Compose** – Container orchestration
 * **Prometheus** – Monitoring & metrics collection
@@ -72,7 +71,6 @@ docker ps
 
 | Service       | URL                                            | Description          |
 | ------------- | ---------------------------------------------- | -------------------- |
-| URL Shortener | [http://localhost:8000](http://localhost:8000) | Main web service     |
 | Prometheus    | [http://localhost:9091](http://localhost:9091) | Metrics and query UI |
 
 ---
@@ -80,14 +78,15 @@ docker ps
 ## 📈 Prometheus Setup
 
 Prometheus configuration file:
-`prometheus/prometheus.yml`
+`prometheus.yml`
 
 ```yaml
 global:
   scrape_interval: 5s
 
 scrape_configs:
-  - job_name: 'url_shortener'
+  - job_name: 'urlshortener'
+    metrics_path: /metrics
     static_configs:
       - targets: ['app:8000']
 ```
@@ -98,8 +97,8 @@ This tells Prometheus to scrape metrics from the Flask app every 5 seconds.
 
 ## 🧪 Verify Prometheus is Running
 
-Open **[http://localhost:9090/targets](http://localhost:9090/targets)**
-You should see the target `app:5000` **UP** ✅
+Open **[http://localhost:9091/targets](http://localhost:9090/targets)**
+You should see the target `app:8000` **UP** ✅
 
 📸 *Screenshot here:*
 `![Prometheus Target Up](images/prometheus_up.png)`
@@ -108,7 +107,7 @@ You should see the target `app:5000` **UP** ✅
 
 ## ⚙️ Execute a Metric Query
 
-1. Go to **[http://localhost:9090/](http://localhost:9090/)**
+1. Go to **[http://localhost:9091/](http://localhost:9091/)**
 2. In the “Expression” box, try:
 
    ```
