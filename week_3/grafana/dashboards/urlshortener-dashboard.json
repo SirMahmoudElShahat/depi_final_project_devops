@@ -1,0 +1,78 @@
+{
+  "id": null,
+  "uid": "urlshortener-dashboard",
+  "title": "URL Shortener Monitoring",
+  "tags": ["urlshortener", "prometheus"],
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 2,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Total Shorten Requests",
+      "targets": [
+        {
+          "expr": "sum(rate(url_shortener_shortened_urls_total[5m]))",
+          "legendFormat": "Shorten Requests"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 7 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Successful Redirects",
+      "targets": [
+        {
+          "expr": "sum(rate(url_shortener_successful_redirects_total[5m]))",
+          "legendFormat": "Redirects"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 7 }
+    },
+    {
+      "type": "timeseries",
+      "title": "404 Not Found (Rate & Count)",
+      "targets": [
+        {
+          "expr": "sum(rate(url_shortener_failed_lookups_total[5m]))",
+          "legendFormat": "404 Rate"
+        },
+        {
+          "expr": "increase(url_shortener_failed_lookups_total[5m])",
+          "legendFormat": "404 Count"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 7, "w": 12, "h": 7 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Latency p95",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(url_shortener_request_latency_seconds_bucket[5m])) by (le))",
+          "legendFormat": "p95 Latency"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 7, "w": 12, "h": 7 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Error Ratio (404s / Total)",
+      "targets": [
+        {
+          "expr": "(sum(rate(url_shortener_failed_lookups_total[5m])) / sum(rate(url_shortener_shortened_urls_total[5m]) + rate(url_shortener_successful_redirects_total[5m]) + 0.000001))",
+          "legendFormat": "Error Ratio"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 14, "w": 24, "h": 7 }
+    }
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  }
+}
