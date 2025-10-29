@@ -168,7 +168,7 @@ Example output from terminal:
 
 ## ✅ Verification
 
-* Prometheus: [http://localhost:9090/targets](http://localhost:9090/targets) → should show `app:8000` as **UP**
+* Prometheus: [http://localhost:9091/targets](http://localhost:9091/targets) → should show `app:8000` as **UP**
 * Grafana: [http://localhost:3000/](http://localhost:3000/) → Dashboard auto-loaded
 * Alertmanager: [http://localhost:9093/](http://localhost:9093/) → No alert groups found (normal if no rules triggered)
 
