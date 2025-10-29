@@ -51,7 +51,7 @@ cd week_2
 ### 2. Start all services using Docker Compose
 
 ```bash
-docker-compose up -d --build
+sudo docker compose up -d --build
 ```
 
 This will start:
@@ -126,12 +126,12 @@ You should see the target `app:8000` **UP** ✅
 
 ## 🔍 Exposed Metrics (Examples)
 
-| Metric Name                            | Description                               |
-| -------------------------------------- | ----------------------------------------- |
-| `urlshortener_shorten_total`           | Total number of shorten requests          |
-| `urlshortener_redirect_total`          | Total number of successful redirects      |
-| `urlshortener_notfound_total`          | Total number of 404 not found errors      |
-| `urlshortener_request_latency_seconds` | Histogram of request latency per endpoint |
+| Metric Name                                         | Description                               |
+| --------------------------------------------------- | ----------------------------------------- |
+| `url_shortener_shortened_urls_total`                | Total number of shorten requests          |
+| `url_shortener_successful_redirects_total`          | Total number of successful redirects      |
+| `url_shortener_failed_lookups_total`                | Total number of 404 not found errors      |
+| `url_shortener_request_latency_seconds`             | Histogram of request latency per endpoint |
 
 ---
 
