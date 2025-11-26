@@ -1,0 +1,18 @@
+# Dockerfile
+FROM node:20-slim
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+
+COPY server.js .
+RUN mkdir -p /app/data && chown -R node:node /app
+USER node
+
+ENV URLSHORTENER_DB=/app/data/urls.db
+ENV PORT=8000
+ENV BASE_URL=http://localhost:8000
+
+EXPOSE 8000
+
+CMD ["node", "server.js"]

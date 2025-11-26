@@ -1,0 +1,28 @@
+groups:
+  - name: urlshortener_rules
+    rules:
+      - alert: HighP95Latency
+        expr: histogram_quantile(0.95, sum(rate(url_shortener_request_latency_seconds_bucket[5m])) by (le))
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High p95 latency for URL Shortener"
+          description: "p95 latency above expected threshold"
+
+      - alert: SpikeIn404
+        expr: increase(url_shortener_failed_lookups_total[5m]) > 10
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Spike in 404 not found responses"
+          description: "More than 10 not found responses in last 5 minutes"
+
+      - alert: HighErrorRate
+        expr: rate(url_shortener_failed_lookups_total[5m]) > 0.2
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High error (404) rate"
